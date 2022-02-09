@@ -70,9 +70,10 @@ function Sequence() {
 // array.push(final)
 // }
 
+const toMap = array
+
 const testFunction = () => {
     setCount(count + 1)
-    alert('test')
     array.push(array.at(-1).match(/(.)\1*/g).map(num => {
         return(
         `${num.length}` + `${num[0]}`
@@ -160,7 +161,7 @@ return(
     </div>
     }  
     {!going ? null :
-    array.map(num => 
+    toMap.map(num => 
         <Ul key={num} color={isChecked ? randomColor : `black`}>{num}</Ul>
     )} 
     {!going ? null : 
