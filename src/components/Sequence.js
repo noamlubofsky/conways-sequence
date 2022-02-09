@@ -70,9 +70,23 @@ function Sequence() {
 // array.push(final)
 // }
 
+const testFunction = () => {
+    setCount(count + 1)
+
+    array.push(array.at(-1).match(/(.)\1*/g).map(num => {
+        return(
+        `${num.length}` + `${num[0]}`
+        )
+    }).join('')
+    )
+    console.log(array)
+}
+
 const handleClick = () => {
 
-    setCount(count + 1)
+    // setCount(count + 1)
+
+    testFunction()
 
     // const numArray = array.at(-1).match(/(.)\1*/g)
         
@@ -87,12 +101,12 @@ const handleClick = () => {
     // array.push(final)
     // console.log(array)
 
-    array.push(array.at(-1).match(/(.)\1*/g).map(num => {
-        return(
-        `${num.length}` + `${num[0]}`
-        )
-    }).join('')
-    )
+    // array.push(array.at(-1).match(/(.)\1*/g).map(num => {
+    //     return(
+    //     `${num.length}` + `${num[0]}`
+    //     )
+    // }).join('')
+    // )
 
     }
 
@@ -152,6 +166,10 @@ return(
     {!going ? null : 
     <div>
     <Button onClick={handleClick}>Calculate Next</Button>
+    {
+    array.map(num => 
+        <Ul key={num} color={isChecked ? randomColor : `black`}>{num}</Ul>
+    )} 
     </div>
     }  
     {/* {!going ? null : <Button onClick={display}>Show {count} Rows</Button>}   */}
