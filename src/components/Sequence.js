@@ -110,6 +110,7 @@ const handleSubmit = (e) => {
 }
 
 const display = () => {
+    setCount(0)
 }
 
 return(
