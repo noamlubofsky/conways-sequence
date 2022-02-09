@@ -93,11 +93,13 @@ const toDefault = () => {
     setArray(['1'])
     setGoing(true)
     setCustom(false)
+    setCount(0)
 }
 
 const toCustom = () => {
     setCustom(true)
     setGoing(false)
+    setCount(0)
 }
 
 const handleSubmit = (e) => {
@@ -108,7 +110,6 @@ const handleSubmit = (e) => {
 }
 
 const display = () => {
-    setIsChecked(!isChecked)
 }
 
 return(
@@ -144,7 +145,7 @@ return(
     <Button onClick={handleClick}>Calculate Next</Button>
     </div>
     }  
-    {/* {!going ? null : <Button onClick={display}>Show {count} Rows</Button>}   */}
+    {!going ? null : <Button onClick={display}>Show {count} Rows</Button>}  
     </Container>
     </div>
 )
