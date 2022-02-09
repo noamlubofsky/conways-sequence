@@ -116,7 +116,7 @@ const display = () => {
 return(
     <div>
         <Container>
-        <h1>Conways Sequence</h1>
+        <Header>Conways Sequence</Header>
 
         <Button onClick={toDefault}>{!going ? `Use Default` : `Reset`}</Button>
         <br></br>
@@ -139,7 +139,7 @@ return(
     }  
     {!going ? null :
     array.map(num => 
-        <Ul key={num.id} color={isChecked ? randomColor : `black`}>{num}</Ul>
+        <Ul key={num} color={isChecked ? randomColor : `black`}>{num}</Ul>
     )} 
     {!going ? null : 
     <div>
@@ -156,14 +156,20 @@ const Input = styled.input`
     width: 30vw;
     height: 5vh;
     border: none;
-    border-bottom: 2px solid #E3E3E3;
+    border-bottom: 2px solid #7F7F7F;
+
+    // border-bottom: 2px solid #E3E3E3;
 font-size: large;
 margin-bottom: 2vh;
 margin-left: 1vw;
 outline: none;
+background-color: rgb(85, 85, 85);
+
 &:focus {
     outline: none;
-    border-bottom: 2px solid #7F7F7F;
+    // border-bottom: 2px solid #7F7F7F;
+    border-bottom: 2px solid #E3E3E3;
+
 }
 `;
 
@@ -200,6 +206,12 @@ font-weight: bold;
 color: ${props => props.color};
 margin-right: 15vw;
 margin-left: 5vw;
+`;
+
+const Header = styled.h1`
+color: rgb(37, 38, 51);
+text-transform: uppercase;
+letter-spacing: 1px;
 `;
 
 export default Sequence
