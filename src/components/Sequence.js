@@ -71,33 +71,45 @@ function Sequence() {
 
 
 const testFunction = () => {
-    fullArray.push(fullArray.at(-1).match(/(.)\1*/g).map(num => {
-        return(
-        `${num.length}` + `${num[0]}`
-        )
-    }).join('')
-    )
-    console.log(fullArray)
+    // fullArray.push(fullArray.at(-1).match(/(.)\1*/g).map(num => {
+    //     return(
+    //     `${num.length}` + `${num[0]}`
+    //     )
+    // }).join('')
+    // )
+    // console.log(fullArray)
+            // setCount(count + 1)
+
 }
 
 const handleClick = () => {
 
-    setCount(count + 1)
+    // setCount(count + 1)
 
-    testFunction()
+    // testFunction()
 
-    // const numArray = array.at(-1).match(/(.)\1*/g)
-        
-    // const amounts = numArray.map(num => {
+    // fullArray.push(fullArray.at(-1).match(/(.)\1*/g).map(num => {
     //     return(
     //     `${num.length}` + `${num[0]}`
     //     )
-    // })
+    // }).join('')
+    // )
+    // console.log(fullArray)
+
+    const numArray = fullArray.at(-1).match(/(.)\1*/g)
+        
+    const amounts = numArray.map(num => {
+        return(
+        `${num.length}` + `${num[0]}`
+        )
+    })
     
-    // const final = amounts.join('')
+    const final = amounts.join('')
+
+    setFullArray([...fullArray, final])
     
     // array.push(final)
-    // console.log(array)
+    console.log(fullArray)
 
     // array.push(array.at(-1).match(/(.)\1*/g).map(num => {
     //     return(
