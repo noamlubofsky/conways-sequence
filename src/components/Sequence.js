@@ -130,23 +130,23 @@ return(
         }
             {!going ? null : 
     <div>
-                <label class="switch">
+                <label className="switch">
                 <input type="checkbox" onChange={() => setIsChecked(!isChecked)}/>
-                <span class="slider round"></span>
+                <span className="slider round"></span>
                 </label>
                 <br></br>
     </div>
     }  
     {!going ? null :
     array.map(num => 
-        <Ul color={isChecked ? randomColor : `black`}>{num}</Ul>
+        <Ul key={num.id} color={isChecked ? randomColor : `black`}>{num}</Ul>
     )} 
     {!going ? null : 
     <div>
     <Button onClick={handleClick}>Calculate Next</Button>
     </div>
     }  
-    {!going ? null : <Button onClick={display}>Show {count} Rows</Button>}  
+    {/* {!going ? null : <Button onClick={display}>Show {count} Rows</Button>}   */}
     </Container>
     </div>
 )
