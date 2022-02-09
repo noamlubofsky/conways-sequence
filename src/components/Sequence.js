@@ -3,9 +3,9 @@ import styled from "styled-components";
 import randomColor from "randomcolor";
 
 function Sequence() {
-    const [fullArray, setFullArray] = useState([])
+    const [fullArray, setFullArray] = useState(['1', '2', '3'])
     const [custom, setCustom] = useState(false)
-    const [going, setGoing] = useState(false)
+    const [going, setGoing] = useState(true)
     const [custNum, setCustNum] = useState('')
     const [count, setCount] = useState(0)
     const [isChecked, setIsChecked] = useState(false)
@@ -111,12 +111,6 @@ const handleClick = () => {
     // array.push(final)
     console.log(fullArray)
 
-    // array.push(array.at(-1).match(/(.)\1*/g).map(num => {
-    //     return(
-    //     `${num.length}` + `${num[0]}`
-    //     )
-    // }).join('')
-    // )
 
     }
 
