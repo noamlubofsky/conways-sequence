@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import randomColor from "randomcolor";
-import Switch from "react-switch";
 
 function Sequence() {
-    const [array, setArray] = useState([])
+    const [fullArray, setFullArray] = useState([])
     const [custom, setCustom] = useState(false)
     const [going, setGoing] = useState(false)
     const [custNum, setCustNum] = useState('')
@@ -70,22 +69,20 @@ function Sequence() {
 // array.push(final)
 // }
 
-const toMap = array
 
 const testFunction = () => {
-    setCount(count + 1)
-    array.push(array.at(-1).match(/(.)\1*/g).map(num => {
+    fullArray.push(fullArray.at(-1).match(/(.)\1*/g).map(num => {
         return(
         `${num.length}` + `${num[0]}`
         )
     }).join('')
     )
-    console.log(array)
+    console.log(fullArray)
 }
 
 const handleClick = () => {
 
-    // setCount(count + 1)
+    setCount(count + 1)
 
     testFunction()
 
@@ -113,7 +110,7 @@ const handleClick = () => {
 
 
 const toDefault = () => {
-    setArray(['1'])
+    setFullArray(['1'])
     setGoing(true)
     setCustom(false)
     setCount(0)
@@ -127,7 +124,7 @@ const toCustom = () => {
 
 const handleSubmit = (e) => {
     e.preventDefault()
-    setArray([`${custNum}`])
+    setFullArray([`${custNum}`])
     setCustom(false)
     setGoing(true)
 }
@@ -161,7 +158,7 @@ return(
     </div>
     }  
     {!going ? null :
-    toMap.map(num => 
+    fullArray.map(num => 
         <Ul key={num} color={isChecked ? randomColor : `black`}>{num}</Ul>
     )} 
     {!going ? null : 
