@@ -72,7 +72,7 @@ function Sequence() {
 
 const testFunction = () => {
     setCount(count + 1)
-
+    alert('test')
     array.push(array.at(-1).match(/(.)\1*/g).map(num => {
         return(
         `${num.length}` + `${num[0]}`
@@ -166,10 +166,6 @@ return(
     {!going ? null : 
     <div>
     <Button onClick={handleClick}>Calculate Next</Button>
-    {
-    array.map(num => 
-        <Ul key={num} color={isChecked ? randomColor : `black`}>{num}</Ul>
-    )} 
     </div>
     }  
     {/* {!going ? null : <Button onClick={display}>Show {count} Rows</Button>}   */}
