@@ -88,7 +88,10 @@ const handleClick = () => {
     // )
     // console.log(fullArray)
 
-    const numArray = fullArray.at(-1).match(/(.)\1*/g)
+    const numArray = fullArray[fullArray.length - 1].match(/(.)\1*/g)
+
+    // const numArray = fullArray.at(-1).match(/(.)\1*/g)
+
         
     const amounts = numArray.map(num => {
         return(
