@@ -3,11 +3,12 @@ import styled from "styled-components";
 import randomColor from "randomcolor";
 
 function Sequence() {
-    const [fullArray, setFullArray] = useState(['1', '2', '3'])
+    const [fullArray, setFullArray] = useState([])
     const [custom, setCustom] = useState(false)
-    const [going, setGoing] = useState(true)
+    const [going, setGoing] = useState(false)
     const [custNum, setCustNum] = useState('')
     const [count, setCount] = useState(0)
+    const [testCount, setTestCount] = useState(0)
     const [isChecked, setIsChecked] = useState(false)
 
 
@@ -84,7 +85,7 @@ const testFunction = () => {
 
 const handleClick = () => {
 
-    // setCount(count + 1)
+    setCount(count + 1)
 
     // testFunction()
 
@@ -106,9 +107,9 @@ const handleClick = () => {
     
     const final = amounts.join('')
 
-    setFullArray([...fullArray, final])
+    // setFullArray([...fullArray, final])
     
-    // array.push(final)
+    fullArray.push(final)
     console.log(fullArray)
 
 
@@ -137,6 +138,8 @@ const handleSubmit = (e) => {
 
 const display = () => {
     setCount(0)
+    setTestCount(testCount + 1)
+
 }
 
 return(
@@ -163,7 +166,8 @@ return(
                 <br></br>
     </div>
     }  
-    {!going ? null :
+    {
+    !going ? null :
     fullArray.map(num => 
         <Ul key={num} color={isChecked ? randomColor : `black`}>{num}</Ul>
     )} 
@@ -172,7 +176,7 @@ return(
     <Button onClick={handleClick}>Calculate Next</Button>
     </div>
     }  
-    {/* {!going ? null : <Button onClick={display}>Show {count} Rows</Button>}   */}
+    {!going ? null : <Button onClick={display}>Show {count} Rows</Button>}  
     </Container>
     </div>
 )
