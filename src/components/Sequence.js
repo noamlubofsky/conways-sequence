@@ -74,18 +74,26 @@ const handleClick = () => {
 
     setCount(count + 1)
 
-    const numArray = array.at(-1).match(/(.)\1*/g)
+    // const numArray = array.at(-1).match(/(.)\1*/g)
         
-    const amounts = numArray.map(num => {
+    // const amounts = numArray.map(num => {
+    //     return(
+    //     `${num.length}` + `${num[0]}`
+    //     )
+    // })
+    
+    // const final = amounts.join('')
+    
+    // array.push(final)
+    // console.log(array)
+
+    array.push(array.at(-1).match(/(.)\1*/g).map(num => {
         return(
         `${num.length}` + `${num[0]}`
         )
-    })
-    
-    const final = amounts.join('')
-    
-    array.push(final)
-    console.log(array)
+    }).join('')
+    )
+
     }
 
 
@@ -116,7 +124,7 @@ const display = () => {
 return(
     <div>
         <Container>
-        <Header>Conways Sequence</Header>
+        <Header>Conway's Sequence</Header>
 
         <Button onClick={toDefault}>{!going ? `Use Default` : `Reset`}</Button>
         <br></br>
@@ -163,7 +171,7 @@ font-size: large;
 margin-bottom: 2vh;
 margin-left: 1vw;
 outline: none;
-background-color: rgb(85, 85, 85);
+background-color: rgb(117, 117, 117);
 
 &:focus {
     outline: none;
@@ -188,7 +196,7 @@ justify-content: center;
 font-size: 1.5vh;
 margin-top: 1vh;
 margin-bottom: 2vh;
-
+background-color: rgb(200, 200, 200);
 border-radius: 5px;
 
 `;
