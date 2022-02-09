@@ -71,23 +71,14 @@ function Sequence() {
 // }
 
 
-const testFunction = () => {
-    // fullArray.push(fullArray.at(-1).match(/(.)\1*/g).map(num => {
-    //     return(
-    //     `${num.length}` + `${num[0]}`
-    //     )
-    // }).join('')
-    // )
-    // console.log(fullArray)
-            // setCount(count + 1)
-
+const testFunction = (final) => {
+    setFullArray([...fullArray, final])
 }
 
 const handleClick = () => {
 
-    setCount(count + 1)
+    // setCount(count + 1)
 
-    // testFunction()
 
     // fullArray.push(fullArray.at(-1).match(/(.)\1*/g).map(num => {
     //     return(
@@ -107,9 +98,12 @@ const handleClick = () => {
     
     const final = amounts.join('')
 
+        testFunction(final)
+
+
     // setFullArray([...fullArray, final])
     
-    fullArray.push(final)
+    // fullArray.push(final)
     console.log(fullArray)
 
 
@@ -176,7 +170,7 @@ return(
     <Button onClick={handleClick}>Calculate Next</Button>
     </div>
     }  
-    {!going ? null : <Button onClick={display}>Show {count} Rows</Button>}  
+    {/* {!going || count === 0 ? null : <Button onClick={display}>Show {count} Rows</Button>}   */}
     </Container>
     </div>
 )
