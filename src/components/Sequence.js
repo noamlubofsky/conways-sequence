@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import randomColor from "randomcolor";
+import NumberString from './NumberString'
+
 
 function Sequence() {
     const [fullArray, setFullArray] = useState([])
@@ -10,89 +12,14 @@ function Sequence() {
     const [count, setCount] = useState(0)
     const [testCount, setTestCount] = useState(0)
     const [isChecked, setIsChecked] = useState(false)
+    const [loading, setLoading] = useState(false)
 
-
-// const handleClick = () => {
-
-// const numString = 
-// (() => {
-//     "use strict";
- 
-//     const main = () =>
-//         group(array.at(-1))
-//         .map(x => x.join(""))
-//         .join(", ");
-
-//     const group = xs =>
-//         groupBy(a => b => a === b)(xs);
- 
-//      const groupBy = eqOp =>
-//         xs => 0 < xs.length ? (() => {
-//             const [h, ...t] = xs;
-//             const [groups, g] = t.reduce(
-//                 ([gs, a], x) => eqOp(x)(a[0]) ? (
-//                     Tuple(gs)([...a, x])
-//                 ) : Tuple([...gs, a])([x]),
-//                 Tuple([])([h])
-//             );
- 
-//             return [...groups, g];
-//         })() : [];
-
-//     const Tuple = a =>
-//         b => ({
-//             type: "Tuple",
-//             "0": a,
-//             "1": b,
-//             length: 2,
-//             *[Symbol.iterator]() {
-//                 for (const k in this) {
-//                     if (!isNaN(k)) {
-//                         yield this[k];
-//                     }
-//                 }
-//             }
-//         });
- 
-//     return main();
-// })();
-
-// const numArray = numString.split(', ')
-
-// const amounts = numArray.map(num => {
-//     return(
-//     `${num.length}` + `${num[0]}`
-//     )
-// })
-
-// const final = amounts.join('')
-
-// array.push(final)
-// }
-
-
-const testFunction = (final) => {
-    setFullArray([...fullArray, final])
-}
 
 const handleClick = () => {
-
-    // setCount(count + 1)
-
-
-    // fullArray.push(fullArray.at(-1).match(/(.)\1*/g).map(num => {
-    //     return(
-    //     `${num.length}` + `${num[0]}`
-    //     )
-    // }).join('')
-    // )
-    // console.log(fullArray)
+    setLoading(true)
 
     const numArray = fullArray[fullArray.length - 1].match(/(.)\1*/g)
 
-    // const numArray = fullArray.at(-1).match(/(.)\1*/g)
-
-        
     const amounts = numArray.map(num => {
         return(
         `${num.length}` + `${num[0]}`
@@ -101,14 +28,11 @@ const handleClick = () => {
     
     const final = amounts.join('')
 
-        testFunction(final)
-
-
-    // setFullArray([...fullArray, final])
+    setFullArray([...fullArray, final])
     
     // fullArray.push(final)
     console.log(fullArray)
-
+    setLoading(false)
 
     }
 
