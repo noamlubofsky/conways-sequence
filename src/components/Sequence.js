@@ -95,17 +95,14 @@ const Input = styled.input`
     height: 5vh;
     border: none;
     border-bottom: 2px solid #7F7F7F;
-
-    // border-bottom: 2px solid #E3E3E3;
-font-size: large;
-margin-bottom: 2vh;
-margin-left: 1vw;
-outline: none;
-background-color: rgb(117, 117, 117);
+    font-size: large;
+    margin-bottom: 2vh;
+    margin-left: 1vw;
+    outline: none;
+    background-color: rgb(83, 83, 83);
 
 &:focus {
     outline: none;
-    // border-bottom: 2px solid #7F7F7F;
     border-bottom: 2px solid #E3E3E3;
 
 }
