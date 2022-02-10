@@ -94,7 +94,7 @@ return(
     )} 
     {!going ? null : 
     <div>
-    <Button onClick={handleClick}>Calculate Next</Button>
+    <Button onClick={handleClick}>{!loading ? `Calculate Next` : `Calculating...`}</Button>
     </div>
     }  
     {/* {!going || count === 0 ? null : <Button onClick={display}>Show {count} Rows</Button>}   */}
