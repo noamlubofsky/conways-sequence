@@ -15,6 +15,27 @@ function Sequence() {
     const [guess, setGuess] = useState('')
     const [correct, setCorrect] = useState(false)
     const [incorrect, setIncorrect] = useState(false)
+    const [shake, setShake] = useState(false);
+
+
+    // validation for targetSalary input
+// var invalidChars = ["#", "+", "*", ";", ",", "-"];
+// var numberInput = document.getElementById('numberInput');
+// numberInput.addEventListener("keydown", function(event) {
+//   if (invalidChars.includes(event.key)) {
+//     event.preventDefault();
+//   }
+// });
+
+const animate = () => {
+        
+    // Button begins to shake
+    setShake(true);
+    
+    // Buttons stops to shake after 2 seconds
+    setTimeout(() => setShake(false), 2000);
+    
+}
 
 const handleClick = () => {
     setLoading(true)
@@ -56,6 +77,23 @@ const handleSubmit = (e) => {
     setGoing(true)
 }
 
+const handleGuess = (e) => {
+setGuess(e.target.value)
+const numArray = fullArray[fullArray.length - 1].match(/(.)\1*/g)
+const amounts = numArray.map(num => {
+    return(
+    `${num.length}` + `${num[0]}`
+    )
+})
+const final = amounts.join('')
+
+if(guess === final){
+    setCorrect(true)
+}else{
+    setCorrect(false)
+}
+}
+
 const handleInput = (e) => {
     e.preventDefault()
 
@@ -77,10 +115,13 @@ const handleInput = (e) => {
             setCorrect(false)
         }, 1000)
     }else{
-        setIncorrect(true)
-        setTimeout(() => {
-            setIncorrect(false)
-        }, 1000)
+        setCorrect(false)
+        animate()
+
+        // setIncorrect(true)
+        // setTimeout(() => {
+        //     setIncorrect(false)
+        // }, 1000)
     }
 }
 
@@ -103,7 +144,7 @@ return(
         <Button onClick={toCustom}>Use Custom</Button>
         {!custom ? null : 
         <form onSubmit={handleSubmit}>
-            <Input required type='text' value={custNum} onChange={(e) => setCustNum(e.target.value)}/>
+            <Input required id="numberInput" type="tel" value={custNum} onChange={(e) => setCustNum(e.target.value)}/>
             <br></br>
             <Button type='submit'>Start</Button>
         </form>
@@ -118,10 +159,11 @@ return(
     <div>
             {!inputting ? null : 
         <form onSubmit={handleInput}>
-            {!correct && !incorrect ? <InputGuess required type='number' placeholder='Next in Sequence'value={guess} onChange={(e) => setGuess(e.target.value)}/> : null}
+            
+<input required className={shake ? `shake` : null} type="tel" placeholder={!correct ? 'Next in Sequence' : 'Correct!'} value={guess} color={correct && guess !== '' ? 'green' : 'red'} onChange={handleGuess}/>
             {/* <br></br> */}
-            {!correct ? null : <Correct>Correct!</Correct>}
-            {!incorrect ? null : <Incorrect>Sorry, Incorrect</Incorrect>}
+            {/* {!correct ? null : <Correct>Correct!</Correct>}
+            {!incorrect ? null : <Incorrect>Sorry, Incorrect</Incorrect>} */}
             <br></br>
             <Button type='submit'>Submit</Button>
         </form>
@@ -132,6 +174,7 @@ return(
     </div>
     }  
     </Container>
+    <Footer>Look-and-see Sequence</Footer>
     </div>
 )
 }
@@ -146,11 +189,9 @@ const Input = styled.input`
     margin-left: 1vw;
     outline: none;
     background-color: rgb(83, 83, 83);
-
 &:focus {
     outline: none;
     border-bottom: 2px solid #E3E3E3;
-
 }
 `;
 
@@ -165,10 +206,10 @@ const InputGuess = styled.input`
     outline: none;
     background-color: rgb(83, 83, 83);
     text-align: center;
-
 &:focus {
     outline: none;
-    border-bottom: 2px solid #E3E3E3;
+    // border-bottom: 2px solid #E3E3E3;
+    border-bottom: 2px solid ${props => props.color};
 
 }
 `;
@@ -191,7 +232,6 @@ margin-top: 1vh;
 margin-bottom: 2vh;
 background-color: rgb(200, 200, 200);
 border-radius: 5px;
-
 `;
 
 const Container = styled.div`
@@ -200,6 +240,7 @@ align-items: center;
 text-align: center;
 // overflow: none;
 overflow-wrap: break-word;
+min-height: 90vh;
 `;
 
 const Ul = styled.ul`
@@ -215,14 +256,23 @@ text-transform: uppercase;
 letter-spacing: 1px;
 `;
 
+const Footer = styled.div`
+bottom: 0;
+float: bottom;
+position: relative;
+text-align: left;
+color: rgb(37, 38, 51);
+text-transform: uppercase;
+letter-spacing: 1px;
+padding: 10px;
+`;
+
 const Correct = styled.p`
 color: green;
 `;
 
 const Incorrect = styled.p`
 color: red;
-
 `;
 
 export default Sequence
-
