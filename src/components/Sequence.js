@@ -75,12 +75,12 @@ const handleInput = (e) => {
         setGuess('')
         setTimeout(() => {
             setCorrect(false)
-        }, 3000)
+        }, 1000)
     }else{
         setIncorrect(true)
         setTimeout(() => {
             setIncorrect(false)
-        }, 3000)
+        }, 1000)
     }
 }
 
@@ -118,11 +118,12 @@ return(
     <div>
             {!inputting ? null : 
         <form onSubmit={handleInput}>
-            <InputGuess required type='number' placeholder='Next in Sequence'value={guess} onChange={(e) => setGuess(e.target.value)}/>
-            <br></br>
-            <Button type='submit'>Submit</Button>
+            {!correct && !incorrect ? <InputGuess required type='number' placeholder='Next in Sequence'value={guess} onChange={(e) => setGuess(e.target.value)}/> : null}
+            {/* <br></br> */}
             {!correct ? null : <Correct>Correct!</Correct>}
             {!incorrect ? null : <Incorrect>Sorry, Incorrect</Incorrect>}
+            <br></br>
+            <Button type='submit'>Submit</Button>
         </form>
         }
     <Button onClick={() => setInputting(!inputting)}>Input Next</Button>
@@ -220,6 +221,7 @@ color: green;
 
 const Incorrect = styled.p`
 color: red;
+
 `;
 
 export default Sequence
