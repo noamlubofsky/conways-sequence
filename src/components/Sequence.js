@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import randomColor from "randomcolor";
-import NumberString from './NumberString'
+import conway from '../conway.svg'
 
 
 function Sequence() {
@@ -9,8 +9,6 @@ function Sequence() {
     const [custom, setCustom] = useState(false)
     const [going, setGoing] = useState(false)
     const [custNum, setCustNum] = useState('')
-    const [count, setCount] = useState(0)
-    const [testCount, setTestCount] = useState(0)
     const [isChecked, setIsChecked] = useState(false)
     const [loading, setLoading] = useState(false)
 
@@ -31,9 +29,7 @@ const handleClick = () => {
     setFullArray([...fullArray, final])
     
     // fullArray.push(final)
-    console.log(fullArray)
     setLoading(false)
-
     }
 
 
@@ -41,13 +37,11 @@ const toDefault = () => {
     setFullArray(['1'])
     setGoing(true)
     setCustom(false)
-    setCount(0)
 }
 
 const toCustom = () => {
     setCustom(true)
     setGoing(false)
-    setCount(0)
 }
 
 const handleSubmit = (e) => {
@@ -57,17 +51,11 @@ const handleSubmit = (e) => {
     setGoing(true)
 }
 
-const display = () => {
-    setCount(0)
-    setTestCount(testCount + 1)
-
-}
-
 return(
     <div>
         <Container>
         <Header>Conway's Sequence</Header>
-
+        <img src={conway}></img>
         <Button onClick={toDefault}>{!going ? `Use Default` : `Reset`}</Button>
         <br></br>
         <Button onClick={toCustom}>Use Custom Number</Button>
@@ -97,7 +85,6 @@ return(
     <Button onClick={handleClick}>{!loading ? `Calculate Next` : `Calculating...`}</Button>
     </div>
     }  
-    {/* {!going || count === 0 ? null : <Button onClick={display}>Show {count} Rows</Button>}   */}
     </Container>
     </div>
 )
