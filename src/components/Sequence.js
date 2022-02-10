@@ -11,11 +11,14 @@ function Sequence() {
     const [custNum, setCustNum] = useState('')
     const [isChecked, setIsChecked] = useState(false)
     const [loading, setLoading] = useState(false)
-
+    const [inputting, setInputting] = useState(false)
+    const [guess, setGuess] = useState('')
+    const [correct, setCorrect] = useState(false)
+    const [incorrect, setIncorrect] = useState(false)
 
 const handleClick = () => {
     setLoading(true)
-
+    setInputting(false)
     const numArray = fullArray[fullArray.length - 1].match(/(.)\1*/g)
 
     const amounts = numArray.map(num => {
@@ -37,11 +40,13 @@ const toDefault = () => {
     setFullArray(['1'])
     setGoing(true)
     setCustom(false)
+    setInputting(false)
 }
 
 const toCustom = () => {
     setCustom(true)
     setGoing(false)
+    setInputting(false)
 }
 
 const handleSubmit = (e) => {
@@ -51,22 +56,41 @@ const handleSubmit = (e) => {
     setGoing(true)
 }
 
+const handleInput = (e) => {
+    e.preventDefault()
+
+    const numArray = fullArray[fullArray.length - 1].match(/(.)\1*/g)
+
+    const amounts = numArray.map(num => {
+        return(
+        `${num.length}` + `${num[0]}`
+        )
+    })
+    
+    const final = amounts.join('')
+
+    if(guess === final){
+        setFullArray([...fullArray, final])
+        setCorrect(true)
+        setGuess('')
+        setTimeout(() => {
+            setCorrect(false)
+        }, 3000)
+    }else{
+        setIncorrect(true)
+        setTimeout(() => {
+            setIncorrect(false)
+        }, 3000)
+    }
+}
+
 return(
     <div>
         <Container>
-        <Header>Conway's Sequence</Header>
+        <Header>Look-and-see Sequence</Header>
         <img src={conway}></img>
-        <Button onClick={toDefault}>{!going ? `Use Default` : `Reset`}</Button>
         <br></br>
-        <Button onClick={toCustom}>Use Custom Number</Button>
-        {!custom ? null : 
-        <form onSubmit={handleSubmit}>
-            <Input required type='number' value={custNum} onChange={(e) => setCustNum(e.target.value)}/>
-            <br></br>
-            <Button type='submit'>Start</Button>
-        </form>
-        }
-            {!going ? null : 
+        {!going ? null : 
     <div>
                 <label className="switch">
                 <input type="checkbox" onChange={() => setIsChecked(!isChecked)}/>
@@ -75,6 +99,16 @@ return(
                 <br></br>
     </div>
     }  
+        <Button onClick={toDefault}>{!going ? `Use Default` : `Reset`}</Button>
+        <Button onClick={toCustom}>Use Custom</Button>
+        {!custom ? null : 
+        <form onSubmit={handleSubmit}>
+            <Input required type='text' value={custNum} onChange={(e) => setCustNum(e.target.value)}/>
+            <br></br>
+            <Button type='submit'>Start</Button>
+        </form>
+        }
+            
     {
     !going ? null :
     fullArray.map(num => 
@@ -82,7 +116,18 @@ return(
     )} 
     {!going ? null : 
     <div>
+            {!inputting ? null : 
+        <form onSubmit={handleInput}>
+            <InputGuess required type='number' placeholder='Next in Sequence'value={guess} onChange={(e) => setGuess(e.target.value)}/>
+            <br></br>
+            <Button type='submit'>Submit</Button>
+            {!correct ? null : <Correct>Correct!</Correct>}
+            {!incorrect ? null : <Incorrect>Sorry, Incorrect</Incorrect>}
+        </form>
+        }
+    <Button onClick={() => setInputting(!inputting)}>Input Next</Button>
     <Button onClick={handleClick}>{!loading ? `Calculate Next` : `Calculating...`}</Button>
+
     </div>
     }  
     </Container>
@@ -108,7 +153,27 @@ const Input = styled.input`
 }
 `;
 
+const InputGuess = styled.input`
+    width: 50vw;
+    height: 5vh;
+    border: none;
+    border-bottom: 2px solid #7F7F7F;
+    font-size: large;
+    margin-bottom: 2vh;
+    margin-left: 1vw;
+    outline: none;
+    background-color: rgb(83, 83, 83);
+    text-align: center;
+
+&:focus {
+    outline: none;
+    border-bottom: 2px solid #E3E3E3;
+
+}
+`;
+
 const Button = styled.button`
+display: inline;
 height: 5vh;
 width: 40vw;
 font-weight: bold;
@@ -147,6 +212,14 @@ const Header = styled.h1`
 color: rgb(37, 38, 51);
 text-transform: uppercase;
 letter-spacing: 1px;
+`;
+
+const Correct = styled.p`
+color: green;
+`;
+
+const Incorrect = styled.p`
+color: red;
 `;
 
 export default Sequence
