@@ -79,7 +79,7 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
-input {
+/* input {
   width: 50vw;
   height: 5vh;
   border: none;
@@ -90,14 +90,9 @@ input {
   outline: none;
   background-color: rgb(83, 83, 83);
   text-align: center;
-}
+} */
 
-input:focus{
-  outline: none;
-  /* border-bottom: 2px solid {props => props.color}; */
-}
-
-input.shake{
+.shake{
   animation: shake .2s infinite;
 }
 @keyframes shake {

@@ -14,12 +14,10 @@ function Sequence() {
     const [inputting, setInputting] = useState(false)
     const [guess, setGuess] = useState('')
     const [correct, setCorrect] = useState(false)
-    const [incorrect, setIncorrect] = useState(false)
     const [shake, setShake] = useState(false);
 
 
     // validation for targetSalary input
-// var invalidChars = ["#", "+", "*", ";", ",", "-"];
 // var numberInput = document.getElementById('numberInput');
 // numberInput.addEventListener("keydown", function(event) {
 //   if (invalidChars.includes(event.key)) {
@@ -33,7 +31,7 @@ const animate = () => {
     setShake(true);
     
     // Buttons stops to shake after 2 seconds
-    setTimeout(() => setShake(false), 2000);
+    setTimeout(() => setShake(false), 1000);
     
 }
 
@@ -70,11 +68,21 @@ const toCustom = () => {
     setInputting(false)
 }
 
+const invalidChars = ["#", "+", "*", ";", ",", "-"];
+
 const handleSubmit = (e) => {
     e.preventDefault()
+    if(!custNum.includes("#"|| "+"|| "*"|| ";"|| ","|| "-")){
     setFullArray([`${custNum}`])
     setCustom(false)
     setGoing(true)
+    }else{
+            // Button begins to shake
+    setShake(true);
+    // Buttons stops to shake after 2 seconds
+    setTimeout(() => setShake(false), 1000);
+    setCustNum('')
+    }
 }
 
 const handleGuess = (e) => {
@@ -144,7 +152,7 @@ return(
         <Button onClick={toCustom}>Use Custom</Button>
         {!custom ? null : 
         <form onSubmit={handleSubmit}>
-            <Input required id="numberInput" type="tel" value={custNum} onChange={(e) => setCustNum(e.target.value)}/>
+            <Input required className={shake ? `shake` : null} type="tel" value={custNum} onChange={(e) => setCustNum(e.target.value)}/>
             <br></br>
             <Button type='submit'>Start</Button>
         </form>
@@ -160,7 +168,7 @@ return(
             {!inputting ? null : 
         <form onSubmit={handleInput}>
             
-<input required className={shake ? `shake` : null} type="tel" placeholder={!correct ? 'Next in Sequence' : 'Correct!'} value={guess} color={correct && guess !== '' ? 'green' : 'red'} onChange={handleGuess}/>
+<InputGuess required className={shake ? `shake` : null} type="tel" placeholder={!correct ? 'Next in Sequence' : 'Correct!'} value={guess} color={correct && guess !== '' ? 'green' : 'red'} onChange={handleGuess}/>
             {/* <br></br> */}
             {/* {!correct ? null : <Correct>Correct!</Correct>}
             {!incorrect ? null : <Incorrect>Sorry, Incorrect</Incorrect>} */}
