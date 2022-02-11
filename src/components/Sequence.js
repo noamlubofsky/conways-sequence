@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import randomColor from "randomcolor";
 import conway from '../conway.svg'
@@ -94,6 +94,7 @@ setCustNum('')
 
 const handleInput = (e) => {
     e.preventDefault()
+    inputRef.current.focus();
 
     const numArray = fullArray[fullArray.length - 1].match(/(.)\1*/g)
     const amounts = numArray.map(num => {
@@ -122,6 +123,7 @@ const handleInput = (e) => {
         animate()
     }
 }
+const inputRef = useRef();
 
 return(
     <div>
@@ -159,8 +161,8 @@ return(
     <div>
             {!inputting ? null : 
                 <form onSubmit={handleInput}>
-                <InputGuess required className={shake ? `shake` : null} id={correct ? `correct` : null} type="tel" placeholder={!correct ? 'Next in Sequence' : 'Correct!'} value={guess} 
-                color={correct ? 'green' : null} onChange={(e) => setGuess(e.target.value)}/>
+                <InputGuess ref={inputRef} required className={shake ? `shake` : null} id={correct ? `correct` : null} type="tel" placeholder={!correct ? 'Next in Sequence' : 'Correct!'} value={guess} 
+                color={correct ? 'green' : null} onChange={(e) => setGuess(e.target.value)} />
                 <br></br>
                 <Button type='submit'>Submit</Button>
             </form>
