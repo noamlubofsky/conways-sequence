@@ -28,6 +28,7 @@ const animate = () => {
 const handleClick = () => {
     setLoading(true)
     setInputting(false)
+    setStreak(0)
     const numArray = fullArray[fullArray.length - 1].match(/(.)\1*/g)
 
     const amounts = numArray.map(num => {

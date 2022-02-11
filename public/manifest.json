@@ -3,18 +3,18 @@
   "name": "Create React App Sample",
   "icons": [
     {
-      "src": "conway.png",
+      "src": "conwaynum.png",
       "sizes": "1024x1024 64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "conway.png",
+      "src": "conwaynum.png",
       "type": "image/png",
       "sizes": "1024x1024"
 
     },
     {
-      "src": "conway.png",
+      "src": "conwaynum.png",
       "type": "image/png",
       "sizes": "1024x1024"
     }
