@@ -15,6 +15,7 @@ function Sequence() {
     const [correct, setCorrect] = useState(false)
     const [incorrect, setIncorrect] = useState(false)
     const [shake, setShake] = useState(false);
+    const [streak, setStreak] = useState(0);
 
 const animate = () => {
         
@@ -33,9 +34,7 @@ const handleClick = () => {
         `${num.length}` + `${num[0]}`
         )
     })
-    
     const final = amounts.join('')
-
     setFullArray([...fullArray, final])
     
     // fullArray.push(final)
@@ -72,6 +71,7 @@ setCustNum('')
         setFullArray([`${custNum}`])
         setCustom(false)
         setGoing(true)
+        setStreak(0)
     }
 }
 
@@ -107,6 +107,7 @@ const handleInput = (e) => {
     if(guess === final){
         setTimeout(() => {
             setFullArray([...fullArray, final])
+            setStreak(streak + 1)
             setGuess('')
 
         }, 1000)
@@ -115,6 +116,7 @@ const handleInput = (e) => {
             setCorrect(false)
         }, 1000)
     }else{
+        setStreak(0)
         setIncorrect(true)
         setTimeout(() => {
             setIncorrect(false)
@@ -142,13 +144,13 @@ return(
                 <br></br>
     </div>
     }  
-        <Button onClick={toDefault}>{!going ? `Use Default` : `Reset`}</Button>
-        <Button onClick={toCustom}>Use Custom</Button>
+        <button class={'pushy__btn'} onClick={toDefault}>{!going ? `Use Default` : `Reset`}</button>
+        <button class={'pushy__btn'} onClick={toCustom}>Use Custom</button>
         {!custom ? null : 
         <form onSubmit={handleSubmit}>
             <Input required className={shake ? `shake` : null} type="tel" value={custNum} onChange={(e) => setCustNum(e.target.value)}/>
             <br></br>
-            <Button type='submit'>Start</Button>
+            <button class={'pushy__btn'} type='submit'>Start</button>
         </form>
         }
             
@@ -164,11 +166,12 @@ return(
                 <InputGuess ref={inputRef} required className={shake ? `shake` : null} id={correct ? `correct` : null} type="tel" placeholder={!correct ? 'Next in Sequence' : 'Correct!'} value={guess} 
                 color={correct ? 'green' : null} onChange={(e) => setGuess(e.target.value)} />
                 <br></br>
-                <Button type='submit'>Submit</Button>
+                <button class={'pushy__btn'} type='submit'>Submit</button>
+                {streak === 0 ? null : <Color>Your Streak: {streak}</Color>}
             </form>
         }
-    <Button onClick={() => setInputting(!inputting)}>Input Next</Button>
-    <Button onClick={handleClick}>{!loading ? `Calculate Next` : `Calculating...`}</Button>
+    <button class={'pushy__btn'} onClick={() => setInputting(!inputting)}>Input Next</button>
+    <button class={'pushy__btn'} onClick={handleClick}>{!loading ? `Calculate Next` : `Calculating...`}</button>
 
     </div>
     }  
@@ -188,7 +191,8 @@ const Input = styled.input`
     margin-bottom: 2vh;
     margin-left: 1vw;
     outline: none;
-    background-color: rgb(83, 83, 83);
+    // background-color: rgb(83, 83, 83);
+    background-color: #403c44;
 &:focus {
     outline: none;
     border-bottom: 2px solid #E3E3E3;
@@ -201,11 +205,13 @@ const InputGuess = styled.input`
     border: none;
     border-bottom: 2px solid #7F7F7F;
     font-size: 1.5em;
-    font-weight: bold;
+    // font-weight: bold;
     margin-bottom: 2vh;
     margin-left: 1vw;
     outline: none;
-    background-color: rgb(83, 83, 83);
+    // background-color: rgb(83, 83, 83);
+    background-color: #403c44;
+
     text-align: center;
 &:focus {
     outline: none;
@@ -253,8 +259,11 @@ margin-left: 5vw;
 
 const Header = styled.h1`
 color: rgb(37, 38, 51);
+// color: #263d45;
 text-transform: uppercase;
 letter-spacing: 1px;
+font-family: 'Times New Roman', Georgia, serif;
+// border-bottom: 2px solid white;
 `;
 
 const Footer = styled.div`
@@ -269,7 +278,7 @@ padding: 10px;
 `;
 
 const Color = styled.p`
-display: inline;
+// display: inline;
 color: rgb(37, 38, 51);
 text-transform: uppercase;
 letter-spacing: 1px;
