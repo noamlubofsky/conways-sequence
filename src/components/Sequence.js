@@ -68,20 +68,24 @@ const toCustom = () => {
     setInputting(false)
 }
 
-const invalidChars = ["#", "+", "*", ";", ",", "-"];
-
 const handleSubmit = (e) => {
     e.preventDefault()
-    if(!custNum.includes("#"|| "+"|| "*"|| ";"|| ","|| "-")){
-    setFullArray([`${custNum}`])
-    setCustom(false)
-    setGoing(true)
+    if(custNum.includes("#")
+    || custNum.includes("+")
+    || custNum.includes("*")
+    || custNum.includes(";")
+    || custNum.includes(",")
+    || custNum.includes("-")
+    ){
+        // Button begins to shake
+setShake(true);
+// Buttons stops to shake after 2 seconds
+setTimeout(() => setShake(false), 1000);
+setCustNum('')
     }else{
-            // Button begins to shake
-    setShake(true);
-    // Buttons stops to shake after 2 seconds
-    setTimeout(() => setShake(false), 1000);
-    setCustNum('')
+        setFullArray([`${custNum}`])
+        setCustom(false)
+        setGoing(true)
     }
 }
 
@@ -141,11 +145,14 @@ return(
         <br></br>
         {!going ? null : 
     <div>
+        <span>
                 <label className="switch">
                 <input type="checkbox" onChange={() => setIsChecked(!isChecked)}/>
                 <span className="slider round"></span>
                 </label>
-                <br></br>
+                {/* <br></br> */}
+                <Color>add some color</Color>
+                </span>
     </div>
     }  
         <Button onClick={toDefault}>{!going ? `Use Default` : `Reset`}</Button>
@@ -275,12 +282,14 @@ letter-spacing: 1px;
 padding: 10px;
 `;
 
-const Correct = styled.p`
-color: green;
+const Color = styled.p`
+display: inline;
+margin-left: 2vw;
+color: rgb(37, 38, 51);
+text-transform: uppercase;
+letter-spacing: 1px;
+padding: 10px;
 `;
 
-const Incorrect = styled.p`
-color: red;
-`;
 
 export default Sequence
