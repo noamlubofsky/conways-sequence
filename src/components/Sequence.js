@@ -3,7 +3,6 @@ import styled from "styled-components";
 import randomColor from "randomcolor";
 import conway from '../conway.svg'
 
-
 function Sequence() {
     const [fullArray, setFullArray] = useState([])
     const [custom, setCustom] = useState(false)
@@ -14,23 +13,12 @@ function Sequence() {
     const [inputting, setInputting] = useState(false)
     const [guess, setGuess] = useState('')
     const [correct, setCorrect] = useState(false)
+    const [incorrect, setIncorrect] = useState(false)
     const [shake, setShake] = useState(false);
-
-
-    // validation for targetSalary input
-// var numberInput = document.getElementById('numberInput');
-// numberInput.addEventListener("keydown", function(event) {
-//   if (invalidChars.includes(event.key)) {
-//     event.preventDefault();
-//   }
-// });
 
 const animate = () => {
         
-    // Button begins to shake
     setShake(true);
-    
-    // Buttons stops to shake after 2 seconds
     setTimeout(() => setShake(false), 1000);
     
 }
@@ -70,17 +58,15 @@ const toCustom = () => {
 
 const handleSubmit = (e) => {
     e.preventDefault()
-    if(custNum.includes("#")
+    if(
+        custNum.includes("#")
     || custNum.includes("+")
     || custNum.includes("*")
     || custNum.includes(";")
     || custNum.includes(",")
     || custNum.includes("-")
     ){
-        // Button begins to shake
-setShake(true);
-// Buttons stops to shake after 2 seconds
-setTimeout(() => setShake(false), 1000);
+animate()
 setCustNum('')
     }else{
         setFullArray([`${custNum}`])
@@ -89,51 +75,51 @@ setCustNum('')
     }
 }
 
-const handleGuess = (e) => {
-setGuess(e.target.value)
-const numArray = fullArray[fullArray.length - 1].match(/(.)\1*/g)
-const amounts = numArray.map(num => {
-    return(
-    `${num.length}` + `${num[0]}`
-    )
-})
-const final = amounts.join('')
+// const handleGuess = async(e) => {
+// setGuess(e.target.value)
+// const numArray = fullArray[fullArray.length - 1].match(/(.)\1*/g)
+// const amounts = numArray.map(num => {
+//     return(
+//     `${num.length}` + `${num[0]}`
+//     )
+// })
+// const final = amounts.join('')
 
-if(guess === final){
-    setCorrect(true)
-}else{
-    setCorrect(false)
-}
-}
+// if(guess === final){
+//     setCorrect(true)
+// }else{
+//     setCorrect(false)
+// }
+// }
 
 const handleInput = (e) => {
     e.preventDefault()
 
     const numArray = fullArray[fullArray.length - 1].match(/(.)\1*/g)
-
     const amounts = numArray.map(num => {
         return(
         `${num.length}` + `${num[0]}`
         )
     })
-    
     const final = amounts.join('')
 
     if(guess === final){
-        setFullArray([...fullArray, final])
+        setTimeout(() => {
+            setFullArray([...fullArray, final])
+            setGuess('')
+
+        }, 1000)
         setCorrect(true)
-        setGuess('')
         setTimeout(() => {
             setCorrect(false)
         }, 1000)
     }else{
+        setIncorrect(true)
+        setTimeout(() => {
+            setIncorrect(false)
+        }, 1000)
         setCorrect(false)
         animate()
-
-        // setIncorrect(true)
-        // setTimeout(() => {
-        //     setIncorrect(false)
-        // }, 1000)
     }
 }
 
@@ -145,14 +131,13 @@ return(
         <br></br>
         {!going ? null : 
     <div>
-        <span>
+            <Color>add some color</Color>
+            <br></br>
                 <label className="switch">
                 <input type="checkbox" onChange={() => setIsChecked(!isChecked)}/>
                 <span className="slider round"></span>
                 </label>
-                {/* <br></br> */}
-                <Color>add some color</Color>
-                </span>
+                <br></br>
     </div>
     }  
         <Button onClick={toDefault}>{!going ? `Use Default` : `Reset`}</Button>
@@ -173,15 +158,12 @@ return(
     {!going ? null : 
     <div>
             {!inputting ? null : 
-        <form onSubmit={handleInput}>
-            
-<InputGuess required className={shake ? `shake` : null} type="tel" placeholder={!correct ? 'Next in Sequence' : 'Correct!'} value={guess} color={correct && guess !== '' ? 'green' : 'red'} onChange={handleGuess}/>
-            {/* <br></br> */}
-            {/* {!correct ? null : <Correct>Correct!</Correct>}
-            {!incorrect ? null : <Incorrect>Sorry, Incorrect</Incorrect>} */}
-            <br></br>
-            <Button type='submit'>Submit</Button>
-        </form>
+                <form onSubmit={handleInput}>
+                <InputGuess required className={shake ? `shake` : null} id={correct ? `correct` : null} type="tel" placeholder={!correct ? 'Next in Sequence' : 'Correct!'} value={guess} 
+                color={correct ? 'green' : null} onChange={(e) => setGuess(e.target.value)}/>
+                <br></br>
+                <Button type='submit'>Submit</Button>
+            </form>
         }
     <Button onClick={() => setInputting(!inputting)}>Input Next</Button>
     <Button onClick={handleClick}>{!loading ? `Calculate Next` : `Calculating...`}</Button>
@@ -200,6 +182,7 @@ const Input = styled.input`
     border: none;
     border-bottom: 2px solid #7F7F7F;
     font-size: large;
+    font-weight: bold;
     margin-bottom: 2vh;
     margin-left: 1vw;
     outline: none;
@@ -216,6 +199,7 @@ const InputGuess = styled.input`
     border: none;
     border-bottom: 2px solid #7F7F7F;
     font-size: large;
+    font-weight: bold;
     margin-bottom: 2vh;
     margin-left: 1vw;
     outline: none;
@@ -255,7 +239,7 @@ align-items: center;
 text-align: center;
 // overflow: none;
 overflow-wrap: break-word;
-min-height: 90vh;
+min-height: 80vh;
 `;
 
 const Ul = styled.ul`
@@ -284,11 +268,9 @@ padding: 10px;
 
 const Color = styled.p`
 display: inline;
-margin-left: 2vw;
 color: rgb(37, 38, 51);
 text-transform: uppercase;
 letter-spacing: 1px;
-padding: 10px;
 `;
 
 

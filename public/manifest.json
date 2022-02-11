@@ -10,12 +10,13 @@
     {
       "src": "conway.svg",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "1024x1024"
+
     },
     {
       "src": "conway.svg",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "1024x1024"
     }
   ],
   "start_url": ".",
