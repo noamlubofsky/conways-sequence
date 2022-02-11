@@ -102,3 +102,7 @@ input:checked + .slider:before {
   color: green;
   background-color: green;
 }
+
+img {
+  margin-bottom: 5vh;
+}

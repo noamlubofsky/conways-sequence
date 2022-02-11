@@ -194,11 +194,11 @@ const Input = styled.input`
 `;
 
 const InputGuess = styled.input`
-    width: 50vw;
+    width: 60vw;
     height: 5vh;
     border: none;
     border-bottom: 2px solid #7F7F7F;
-    font-size: large;
+    font-size: 1.5em;
     font-weight: bold;
     margin-bottom: 2vh;
     margin-left: 1vw;
@@ -239,7 +239,7 @@ align-items: center;
 text-align: center;
 // overflow: none;
 overflow-wrap: break-word;
-min-height: 80vh;
+min-height: 85vh;
 `;
 
 const Ul = styled.ul`
