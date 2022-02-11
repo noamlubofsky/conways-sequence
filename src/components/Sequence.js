@@ -4,9 +4,9 @@ import randomColor from "randomcolor";
 import conway from '../conway.svg'
 
 function Sequence() {
-    const [fullArray, setFullArray] = useState([])
+    const [fullArray, setFullArray] = useState(['1'])
     const [custom, setCustom] = useState(false)
-    const [going, setGoing] = useState(false)
+    const [going, setGoing] = useState(true)
     const [custNum, setCustNum] = useState('')
     const [isChecked, setIsChecked] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -16,6 +16,7 @@ function Sequence() {
     const [incorrect, setIncorrect] = useState(false)
     const [shake, setShake] = useState(false);
     const [streak, setStreak] = useState(0);
+    const [example, setExample] = useState(false)
 
 const animate = () => {
         
@@ -53,6 +54,8 @@ const toCustom = () => {
     setCustom(true)
     setGoing(false)
     setInputting(false)
+    setFullArray([])
+
 }
 
 const handleSubmit = (e) => {
@@ -131,19 +134,12 @@ return(
     <div>
         <Container>
         <Header>Look-and-see Sequence</Header>
-        <img src={conway}></img>
+        <button onClick={() => setExample(!example)} class={'pushy__btn'}>{!example ? `Example` : `Hide`}</button>
         <br></br>
-        {!going ? null : 
-    <div>
-            <Color>add some color</Color>
-            <br></br>
-                <label className="switch">
-                <input type="checkbox" onChange={() => setIsChecked(!isChecked)}/>
-                <span className="slider round"></span>
-                </label>
-                <br></br>
-    </div>
-    }  
+        {!example ? null : 
+        <img src={conway}></img>}
+        <br></br>
+
         <button class={'pushy__btn'} onClick={toDefault}>{!going ? `Use Default` : `Reset`}</button>
         <button class={'pushy__btn'} onClick={toCustom}>Use Custom</button>
         {!custom ? null : 
@@ -153,9 +149,19 @@ return(
             <button class={'pushy__btn'} type='submit'>Start</button>
         </form>
         }
-            
+                    {!going ? null : 
+    <div>
+            <Color>add some color</Color>
+            {/* <br></br> */}
+                <label className="switch">
+                <input type="checkbox" onChange={() => setIsChecked(!isChecked)}/>
+                <span className="slider round"></span>
+                </label>
+                <br></br>
+    </div>
+    }  
     {
-    !going ? null :
+    // !going ? null :
     fullArray.map(num => 
         <Ul key={num} color={isChecked ? randomColor : `black`}>{num}</Ul>
     )} 
@@ -164,13 +170,13 @@ return(
             {!inputting ? null : 
                 <form onSubmit={handleInput}>
                 <InputGuess ref={inputRef} required className={shake ? `shake` : null} id={correct ? `correct` : null} type="tel" placeholder={!correct ? 'Next in Sequence' : 'Correct!'} value={guess} 
-                color={correct ? 'green' : null} onChange={(e) => setGuess(e.target.value)} />
+                color={correct ? 'rgb(0, 87, 0)' : null} onChange={(e) => setGuess(e.target.value)} />
                 <br></br>
                 <button class={'pushy__btn'} type='submit'>Submit</button>
                 {streak === 0 ? null : <Color>Your Streak: {streak}</Color>}
             </form>
         }
-    <button class={'pushy__btn'} onClick={() => setInputting(!inputting)}>Input Next</button>
+    <button class={'pushy__btn'} onClick={() => setInputting(!inputting)}>{inputting ? `Hide Input` : `Input Next`}</button>
     <button class={'pushy__btn'} onClick={handleClick}>{!loading ? `Calculate Next` : `Calculating...`}</button>
 
     </div>
@@ -191,8 +197,10 @@ const Input = styled.input`
     margin-bottom: 2vh;
     margin-left: 1vw;
     outline: none;
+    font-family: 'Cardo', serif;
+
     // background-color: rgb(83, 83, 83);
-    background-color: #403c44;
+    background-color: #596870;
 &:focus {
     outline: none;
     border-bottom: 2px solid #E3E3E3;
@@ -210,7 +218,8 @@ const InputGuess = styled.input`
     margin-left: 1vw;
     outline: none;
     // background-color: rgb(83, 83, 83);
-    background-color: #403c44;
+    background-color: #596870;
+    font-family: 'Cardo', serif;
 
     text-align: center;
 &:focus {
@@ -255,6 +264,8 @@ font-weight: bold;
 color: ${props => props.color};
 margin-right: 15vw;
 margin-left: 5vw;
+font-size: 1.5em;
+
 `;
 
 const Header = styled.h1`
@@ -275,6 +286,7 @@ color: rgb(37, 38, 51);
 text-transform: uppercase;
 letter-spacing: 1px;
 padding: 10px;
+margin-top: 5vh;
 `;
 
 const Color = styled.p`
