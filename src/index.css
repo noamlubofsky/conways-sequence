@@ -124,7 +124,7 @@ img {
   margin-top: 5px;
   margin-bottom: 5px;
   font-family: 'Cardo', serif;
-
+height: 6vh;
   text-decoration: none;  
   text-transform: uppercase;
 letter-spacing: 1px;
@@ -157,6 +157,13 @@ background-color: #36485f;
     
   .pushy__btn:active, .pushy__btn:focus {
     outline: none; 
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
   }
   .pushy__btn--blue {
     background-color: #1199EE; }

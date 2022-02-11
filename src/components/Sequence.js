@@ -173,7 +173,7 @@ return(
                 color={correct ? 'rgb(0, 87, 0)' : null} onChange={(e) => setGuess(e.target.value)} />
                 <br></br>
                 <button class={'pushy__btn'} type='submit'>Submit</button>
-                {streak === 0 ? null : <Color>Your Streak: {streak}</Color>}
+                <Color>Your Streak: {streak}</Color>
             </form>
         }
     <button class={'pushy__btn'} onClick={() => setInputting(!inputting)}>{inputting ? `Hide Input` : `Input Next`}</button>
