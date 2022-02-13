@@ -266,16 +266,17 @@ min-height: 85vh;
 `;
 
 const Ul = styled.ul`
-font-weight: bold;
+// font-weight: bold;
 color: ${props => props.color};
 margin-right: ${props => props.mobile}vw;
 font-size: 1.5em;
 
 `;
 
-const Header = styled.h1`
+const Header = styled.p`
 color: rgb(37, 38, 51);
 // color: #263d45;
+font-size: 2em;
 text-transform: uppercase;
 letter-spacing: 1px;
 font-family: 'Times New Roman', Georgia, serif;
