@@ -19,8 +19,7 @@ function Sequence() {
     const [streak, setStreak] = useState(0);
     const [example, setExample] = useState(false)
 
-const animate = () => {
-        
+const animate = () => {     
     setShake(true);
     setTimeout(() => setShake(false), 1000);
     
@@ -30,6 +29,7 @@ const handleClick = () => {
     setLoading(true)
     setInputting(false)
     setStreak(0)
+    setGuess('')
     const numArray = fullArray[fullArray.length - 1].match(/(.)\1*/g)
 
     const amounts = numArray.map(num => {
@@ -50,6 +50,8 @@ const toDefault = () => {
     setGoing(true)
     setCustom(false)
     setInputting(false)
+    setCustNum('')
+    setGuess('')
 }
 
 const toCustom = () => {
@@ -57,7 +59,7 @@ const toCustom = () => {
     setGoing(false)
     setInputting(false)
     setFullArray([])
-
+    setGuess('')
 }
 
 const handleSubmit = (e) => {
