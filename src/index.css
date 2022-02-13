@@ -103,7 +103,10 @@ input:checked + .slider:before {
 
 #correct{
   color: rgb(0, 87, 0);
+}
 
+#test{
+  color: #36485f;
 }
 
 @keyframes shake {
@@ -119,12 +122,15 @@ img {
 
 .pushy__btn {
   -webkit-font-smoothing: antialiased;
+justify-content: center;
+text-align: center;
+align-items: center;
   margin-right: 5px;
   margin-left: 5px;
   margin-top: 5px;
   margin-bottom: 5px;
   font-family: 'Cardo', serif;
-height: 6vh;
+height: auto;
   text-decoration: none;  
   text-transform: uppercase;
 letter-spacing: 1px;

@@ -170,7 +170,7 @@ return(
     <div>
             {!inputting ? null : 
                 <form onSubmit={handleInput}>
-                <InputGuess ref={inputRef} required className={shake ? `shake` : null} id={correct ? `correct` : null} type="tel" placeholder={!correct ? 'Next in Sequence' : 'Correct!'} value={guess} 
+                <InputGuess ref={inputRef} required className={shake ? `shake` : null} id={correct ? `correct` : `null`} type="tel" placeholder={!correct ? 'Next in Sequence' : 'Correct!'} value={guess} 
                 color={correct ? 'rgb(0, 87, 0)' : null} onChange={(e) => setGuess(e.target.value)} />
                 <br></br>
                 <button class={'pushy__btn'} type='submit'>Submit</button>
@@ -225,7 +225,7 @@ const InputGuess = styled.input`
     text-align: center;
 &:focus {
     outline: none;
-    // border-bottom: 2px solid #E3E3E3;
+border-bottom: 2px solid #36485f;
     border-bottom: 2px solid ${props => props.color};
 
 }
@@ -237,13 +237,13 @@ height: 5vh;
 width: 40vw;
 font-weight: bold;
 text-decoration: none;
+justify-content: center;
 text-align: center;
 align-items: center;
 color: rgb(37, 38, 51);
 text-transform: uppercase;
 letter-spacing: 1px;
 transition: all .35s;
-justify-content: center;
 font-size: 1.5vh;
 margin-top: 1vh;
 margin-bottom: 2vh;
@@ -263,8 +263,8 @@ min-height: 85vh;
 const Ul = styled.ul`
 font-weight: bold;
 color: ${props => props.color};
-margin-right: 15vw;
-margin-left: 5vw;
+margin-right: 7vw;
+// margin-left: 5vw;
 font-size: 1.5em;
 
 `;
