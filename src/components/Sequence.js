@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import randomColor from "randomcolor";
 import conway from '../conway.svg'
+import {isMobile} from 'react-device-detect';
 
 function Sequence() {
     const [fullArray, setFullArray] = useState(['1'])
@@ -134,7 +135,7 @@ const inputRef = useRef();
 return(
     <div>
         <Container>
-        <Header>Look-and-see Sequence</Header>
+        <Header>Look-and-say Sequence</Header>
         <button onClick={() => setExample(!example)} class={'pushy__btn'}>{!example ? `Example` : `Hide`}</button>
         <br></br>
         {!example ? null : 
@@ -164,7 +165,9 @@ return(
     {
     // !going ? null :
     fullArray.map(num => 
-        <Ul key={num} color={isChecked ? randomColor : `black`}>{num}</Ul>
+        <div>
+        <Ul key={num} mobile={isMobile ? `10` : `2.5`} color={isChecked ? randomColor : `black`}>{num}</Ul>
+    </div>
     )} 
     {!going ? null : 
     <div>
@@ -183,7 +186,7 @@ return(
     </div>
     }  
     </Container>
-    <Footer>Look-and-see Sequence</Footer>
+    <Footer>Look-and-say Sequence</Footer>
     </div>
 )
 }
@@ -263,8 +266,7 @@ min-height: 85vh;
 const Ul = styled.ul`
 font-weight: bold;
 color: ${props => props.color};
-margin-right: 7vw;
-// margin-left: 5vw;
+margin-right: ${props => props.mobile}vw;
 font-size: 1.5em;
 
 `;
