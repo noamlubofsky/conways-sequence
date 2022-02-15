@@ -18,6 +18,7 @@ function Sequence() {
     const [shake, setShake] = useState(false);
     const [streak, setStreak] = useState(0);
     const [example, setExample] = useState(false)
+    const [valid, setValid] = useState(false)
 
 const animate = () => {     
     setShake(true);
@@ -73,6 +74,8 @@ const handleSubmit = (e) => {
     || custNum.includes("-")
     ){
 animate()
+setValid(true)
+setTimeout(() => setValid(false), 1000);
 setCustNum('')
     }else{
         setFullArray([`${custNum}`])
@@ -134,6 +137,7 @@ const handleInput = (e) => {
 }
 const inputRef = useRef();
 
+
 return(
     <div>
         <Container>
@@ -141,14 +145,15 @@ return(
         <button onClick={() => setExample(!example)} class={'pushy__btn'}>{!example ? `Example` : `Hide`}</button>
         <br></br>
         {!example ? null : 
-        <img src={conway}></img>}
+        <img src={conway} alt='example'></img>}
         <br></br>
 
         <button class={'pushy__btn'} onClick={toDefault}>{!going ? `Use Default` : `Reset`}</button>
         <button class={'pushy__btn'} onClick={toCustom}>Use Custom</button>
         {!custom ? null : 
         <form onSubmit={handleSubmit}>
-            <Input required className={shake ? `shake` : null} type="tel" value={custNum} onChange={(e) => setCustNum(e.target.value)}/>
+            <Input required className={shake ? `shake` : null} type={isMobile ? "tel" : "number"} value={custNum} 
+            onChange={(e) => setCustNum(e.target.value)} color={valid ? 'rgb(88, 0, 0)' : 'grey'}/>
             <br></br>
             <button class={'pushy__btn'} type='submit'>Start</button>
         </form>
@@ -175,8 +180,8 @@ return(
     <div>
             {!inputting ? null : 
                 <form onSubmit={handleInput}>
-                <InputGuess ref={inputRef} required className={shake ? `shake` : null} id={correct ? `correct` : `null`} type="tel" placeholder={!correct ? 'Next in Sequence' : 'Correct!'} value={guess} 
-                color={correct ? 'rgb(0, 87, 0)' : null} onChange={(e) => setGuess(e.target.value)} />
+                <InputGuess ref={inputRef} required className={shake ? `shake` : null} id={correct ? `correct` : `null`} type={isMobile ? "tel" : "number"} placeholder={!correct ? 'Next in Sequence' : 'Correct!'} value={guess} 
+                color={!correct && !shake ? '#36485f' : null} onChange={(e) => setGuess(e.target.value)} />
                 <br></br>
                 <button class={'pushy__btn'} type='submit'>Submit</button>
                 <Color>Your Streak: {streak}</Color>
@@ -207,9 +212,11 @@ const Input = styled.input`
 
     // background-color: rgb(83, 83, 83);
     background-color: #596870;
+    border-bottom: 2px solid ${props => props.color};
 &:focus {
     outline: none;
-    border-bottom: 2px solid #E3E3E3;
+    border-bottom: 2px solid #36485f;
+
 }
 `;
 
@@ -230,7 +237,7 @@ const InputGuess = styled.input`
     text-align: center;
 &:focus {
     outline: none;
-border-bottom: 2px solid #36485f;
+    border-bottom: 2px solid #36485f;
     border-bottom: 2px solid ${props => props.color};
 
 }
@@ -280,7 +287,6 @@ font-size: 2em;
 text-transform: uppercase;
 letter-spacing: 1px;
 font-family: 'Times New Roman', Georgia, serif;
-// border-bottom: 2px solid white;
 `;
 
 const Footer = styled.div`
