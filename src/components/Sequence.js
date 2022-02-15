@@ -19,6 +19,8 @@ function Sequence() {
     const [streak, setStreak] = useState(0);
     const [example, setExample] = useState(false)
     const [valid, setValid] = useState(false)
+    const [usingDefault, setUsingDefault] = useState(true)
+    const [usingCustom, setUsingCustom] = useState(false)
 
 const animate = () => {     
     setShake(true);
@@ -53,14 +55,22 @@ const toDefault = () => {
     setInputting(false)
     setCustNum('')
     setGuess('')
+    setUsingDefault(true)
+    setUsingCustom(false)
 }
 
 const toCustom = () => {
+    {usingCustom ?         
+        setCustom(true)
+        :
     setCustom(true)
     setGoing(false)
     setInputting(false)
     setFullArray([])
     setGuess('')
+    setUsingCustom(true)
+    setUsingDefault(false)
+    }
 }
 
 const handleSubmit = (e) => {
@@ -148,8 +158,8 @@ return(
         <img src={conway} alt='example'></img>}
         <br></br>
 
-        <button class={'pushy__btn'} onClick={toDefault}>{!going ? `Use Default` : `Reset`}</button>
-        <button class={'pushy__btn'} onClick={toCustom}>Use Custom</button>
+        <button class={'pushy__btn'} onClick={toDefault}>{!going || !usingDefault ? `Use Default` : `Reset`}</button>
+        <button class={'pushy__btn'} onClick={toCustom}>{!going || !usingCustom ? `Use Custom` : `Reset`}</button>
         {!custom ? null : 
         <form onSubmit={handleSubmit}>
             <Input required className={shake ? `shake` : null} type={isMobile ? "tel" : "number"} value={custNum} 
@@ -209,14 +219,12 @@ const Input = styled.input`
     margin-left: 1vw;
     outline: none;
     font-family: 'Cardo', serif;
-
     // background-color: rgb(83, 83, 83);
     background-color: #596870;
     border-bottom: 2px solid ${props => props.color};
 &:focus {
     outline: none;
     border-bottom: 2px solid #36485f;
-
 }
 `;
 
@@ -233,13 +241,11 @@ const InputGuess = styled.input`
     // background-color: rgb(83, 83, 83);
     background-color: #596870;
     font-family: 'Cardo', serif;
-
     text-align: center;
 &:focus {
     outline: none;
     border-bottom: 2px solid #36485f;
     border-bottom: 2px solid ${props => props.color};
-
 }
 `;
 
@@ -277,7 +283,6 @@ const Ul = styled.ul`
 color: ${props => props.color};
 margin-right: ${props => props.mobile}vw;
 font-size: 1.5em;
-
 `;
 
 const Header = styled.p`
